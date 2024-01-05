@@ -10,6 +10,7 @@ public class PlayerMovmint : MonoBehaviour
     Animator anim;
     SpriteRenderer sprite;
 
+    [SerializeField] AudioSource jumpingsound;
     [SerializeField] LayerMask jumpGround;
 
 
@@ -38,6 +39,7 @@ public class PlayerMovmint : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && OnGround() )
         {
+            jumpingsound.Play();
             rb.velocity = new Vector2(0, jumpForce);
         }
 
