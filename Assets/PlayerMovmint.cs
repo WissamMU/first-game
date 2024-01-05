@@ -36,7 +36,7 @@ public class PlayerMovmint : MonoBehaviour
         dirctX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2 (dirctX * MovingSpeed, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && OnGround() )
         {
             rb.velocity = new Vector2(0, jumpForce);
         }
