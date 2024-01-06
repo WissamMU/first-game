@@ -23,7 +23,6 @@ public class finshlevel : MonoBehaviour
     }
     private void finshingLevel()
     {
-        SceneManager.LoadScene("level 2");
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
