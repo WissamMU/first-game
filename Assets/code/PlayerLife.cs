@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
+    GameMaster gm;
+
+
     Animator anim;
     Rigidbody2D rb;
     [SerializeField] AudioSource deathsound;
@@ -13,7 +16,8 @@ public class PlayerLife : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
+        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+        transform.position = gm.LastCheckPoinrpos;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -31,6 +35,7 @@ public class PlayerLife : MonoBehaviour
     }
     private void ResetLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
