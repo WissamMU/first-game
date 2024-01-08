@@ -20,7 +20,6 @@ public class PlayerMovmint : MonoBehaviour
     [SerializeField] float jumpForce =14f;
     [SerializeField] float MovingSpeed = 7f;
     float dirctX = 0f;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +28,7 @@ public class PlayerMovmint : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame

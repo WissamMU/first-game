@@ -8,7 +8,7 @@ TagManager:
   - Strawberry
   - traps
   - Player1
-  - GameMaster
+  - GM
   layers:
   - Default
   - TransparentFX

@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
-    GameMaster gm;
+    Vector2 CheckPointPos;
+
 
 
     Animator anim;
@@ -16,8 +17,8 @@ public class PlayerLife : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
-        transform.position = gm.LastCheckPoinrpos;
+
+        CheckPointPos = transform.position;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -32,10 +33,20 @@ public class PlayerLife : MonoBehaviour
         anim.SetTrigger("death");
         rb.bodyType = RigidbodyType2D.Static;
         deathsound.Play();
+        Invoke("ResetLevel", 2f);
+
     }
     private void ResetLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        transform.position = CheckPointPos;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        anim.SetTrigger("Playerappearing");
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void UpdateCheckPoint(Vector2 pos)
+    {
+        CheckPointPos = pos;
+
     }
 }

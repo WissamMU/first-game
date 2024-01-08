@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class checkPoint : MonoBehaviour
+public class CheckPoint : MonoBehaviour
 {
-    private GameMaster gm;
-    void Start()
+    PlayerLife playerlife;
+    private void Awake()
     {
-        gm = GetComponent<GameMaster>();
+        playerlife = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLife>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player1"))
+        if (collision.CompareTag("Player"))
         {
-            gm.LastCheckPoinrpos = transform.position;
+            playerlife.UpdateCheckPoint(transform.position);
         }
     }
+
 }
