@@ -5,6 +5,12 @@ using UnityEngine;
 public class CheckPoint : MonoBehaviour
 {
     PlayerLife playerlife;
+    Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
     private void Awake()
     {
         playerlife = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLife>();
@@ -13,8 +19,8 @@ public class CheckPoint : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            anim.SetTrigger("PlayerCheck");
             playerlife.UpdateCheckPoint(transform.position);
         }
     }
-
 }

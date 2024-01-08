@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class finshlevel : MonoBehaviour
 {
     AudioSource finshingsound;
+
     bool LeveledFinshed = false;
 
     void Start()
@@ -16,6 +17,7 @@ public class finshlevel : MonoBehaviour
     {
         if (collision.gameObject.name == "Player" && LeveledFinshed == false)
         {
+            GetComponent<Animator>().SetTrigger("winTrigger");
             finshingsound.Play();
             LeveledFinshed=true;
             Invoke("finshingLevel", 2f);

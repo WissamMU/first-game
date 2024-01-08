@@ -4,11 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Collectible
   - Strawberry
   - traps
   - Player1
-  - GM
   layers:
   - Default
   - TransparentFX
