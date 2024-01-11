@@ -2,39 +2,90 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class graping : MonoBehaviour
+public class Grappling : MonoBehaviour
 {
-    public Camera Gcamers;
-    public LineRenderer Glines;
-    public DistanceJoint2D Gdesten;
+    [Header("References")]
+    PlayerMovmint pm;
+    [SerializeField] Transform gunTip;
+    [SerializeField] Transform cam;
+    [SerializeField] LayerMask whatCanGrap;
+    [SerializeField] LineRenderer lr;
 
-    // Start is called before the first frame update
+    [Header("References")]
+    [SerializeField] float maxGrapplingDistance;
+    [SerializeField] float grapplingDelay;
+
+    Vector2 grapplingPoint;
+
+    [Header("Cooldown")]
+    [SerializeField] float grapplingCooldown;
+    float grapplingCooldownTimer;
+
+    [Header("Input")]
+    [SerializeField] KeyCode grapplingKey = KeyCode.Mouse1;
+
+    bool grappling;
+
     void Start()
     {
-        Gdesten.enabled = false;
+        pm = GetComponent<PlayerMovmint>();
+
+        lr.enabled = true;
+        lr.SetPosition(1, gunTip.position);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(grapplingKey))
+            StartGrapple();
+
+        if (grapplingCooldownTimer > 0)
         {
-            Vector2 mousepos = (Vector2)Gcamers.ScreenToViewportPoint(Input.mousePosition);
-            Glines.SetPosition(0, mousepos);
-            Glines.SetPosition(1, transform.position);
-            Gdesten.connectedAnchor = mousepos;
-            Gdesten.enabled = true;
-            Glines.enabled = true;
+            grapplingCooldownTimer -= Time.deltaTime;
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse0))
+    }
+
+    private void LateUpdate()
+    {
+        if (grappling)
         {
-            Gdesten.enabled = false;
-            Glines.enabled = false;
+            lr.SetPosition(0, gunTip.position);
         }
-        
-        if (Gdesten.enabled)
+    }
+
+    void StartGrapple()
+    {
+        if (grapplingCooldown > 0)
+            return;
+
+        grappling = true;
+
+        RaycastHit2D hit = Physics2D.Raycast(cam.position, cam.forward, maxGrapplingDistance, whatCanGrap);
+        if (hit.collider != null)
         {
-            Glines.SetPosition(1,transform.position);
+            grapplingPoint = hit.point;
+
+            Invoke(nameof(ExecuteGrappling), grapplingDelay);
         }
+        else
+        {
+            grapplingPoint = (Vector2)cam.position + (Vector2)(cam.forward.normalized * maxGrapplingDistance);
+
+            Invoke(nameof(StopGrappling), grapplingDelay);
+        }
+    }
+
+    void ExecuteGrappling()
+    {
+        // Add code to perform actions when grappling is executed
+    }
+
+    private void StopGrappling()
+    {
+        grappling = false;
+
+        grapplingCooldownTimer = grapplingCooldown;
+
+        lr.enabled = false;
     }
 }
