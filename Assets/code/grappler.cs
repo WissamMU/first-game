@@ -18,8 +18,13 @@ public class grappler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector2 IfGround = GetComponent<Vector2>();
+        if (IfGround.)
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+
+
+
             Vector2 mousePos = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
             _lineRenderer.SetPosition(0, mousePos);
             _lineRenderer.SetPosition(1, transform.position);
