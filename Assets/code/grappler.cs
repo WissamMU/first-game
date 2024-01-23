@@ -19,7 +19,6 @@ public class grappler : MonoBehaviour
     void Update()
     {
         Vector2 IfGround = GetComponent<Vector2>();
-        if (IfGround.)
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
 
