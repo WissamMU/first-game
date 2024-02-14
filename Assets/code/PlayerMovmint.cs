@@ -15,6 +15,7 @@ public class PlayerMovmint : MonoBehaviour
 
 
     enum MovingState { idel , running , jumping , falling }
+    bool doubleJump;
 
 
     [SerializeField] float jumpForce =14f;
@@ -37,10 +38,22 @@ public class PlayerMovmint : MonoBehaviour
         dirctX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2 (dirctX * MovingSpeed, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && OnGround() )
+        if (OnGround() && !Input.GetButton("Jump"))
         {
-            jumpingsound.Play();
-            rb.velocity = new Vector2(0, jumpForce);
+            doubleJump = false;
+        }
+        if (Input.GetButtonDown("Jump") )
+        {
+            if (OnGround() || doubleJump)
+            {
+                jumpingsound.Play();
+                rb.velocity = new Vector2(0, jumpForce);
+            }
+        }
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        {
+            //jumpingsound.Play();
+            rb.velocity = new Vector2(0, rb.velocity.y * 0.5f);
         }
 
         PlayerAnimtion();
