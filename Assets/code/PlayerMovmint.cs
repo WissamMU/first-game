@@ -44,16 +44,16 @@ public class PlayerMovmint : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump") )
         {
-            if (OnGround() || doubleJump)
+            if (OnGround())
             {
                 jumpingsound.Play();
-                rb.velocity = new Vector2(0, jumpForce);
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                doubleJump = true;
+            }else if (doubleJump)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                jumpingsound.Play();
             }
-        }
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            //jumpingsound.Play();
-            rb.velocity = new Vector2(0, rb.velocity.y * 0.5f);
         }
 
         PlayerAnimtion();
