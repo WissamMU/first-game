@@ -15,7 +15,11 @@ public class IteamsCollact : MonoBehaviour
             collactsound.Play();
             Destroy(collision.gameObject);
             Strawberry++;
-            Strawberrycount.text = "Strawberry: " + Strawberry + "/10";
+            
+            if (Strawberry < 7)
+            {
+                Strawberrycount.text = "Strawberry: " + Strawberry + "/6";
+            }
 
         }
     }
