@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationCenter: {fileID: 4815980258484254766}
   rotationRadius: 4.5
-  angularSpeed: 1
+  angularSpeed: -2
 --- !u!61 &2912434038984075149
 BoxCollider2D:
   m_ObjectHideFlags: 0

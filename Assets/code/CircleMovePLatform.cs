@@ -9,7 +9,7 @@ public class CircularMovement : MonoBehaviour
     Transform rotationCenter;
 
     [SerializeField]
-    float rotationRadius = 2f, angularSpeed = 2f;
+    float rotationRadius = 2f, angularSpeed = -2f;
 
     float posX, posY, angle = 0f;
 
